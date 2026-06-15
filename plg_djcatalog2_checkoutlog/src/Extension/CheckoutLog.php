@@ -69,7 +69,7 @@ final class CheckoutLog extends CMSPlugin implements SubscriberInterface, Databa
             'ajaxUrl' => Uri::root() . 'index.php?option=com_ajax&plugin=checkoutlog&group=system&format=raw',
         ]);
 
-        HTMLHelper::_('script', 'plg_djcatalog2_checkoutlog/js/checkout-logger.js', ['version' => 'auto', 'relative' => true]);
+        HTMLHelper::_('script', 'plg_system_checkoutlog/js/checkout-logger.js', ['version' => 'auto', 'relative' => true]);
     }
 
     /**

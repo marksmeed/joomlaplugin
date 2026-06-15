@@ -21,7 +21,9 @@
         <folder>sql</folder>
     </files>
 
-    <media destination="plg_djcatalog2_checkoutlog" folder="media" />
+    <media destination="plg_system_checkoutlog" folder="media">
+        <folder>js</folder>
+    </media>
 
     <languages>
         <language tag="en-GB">language/en-GB/plg_system_checkoutlog.ini</language>

@@ -6,8 +6,17 @@
     <version>1.0.0</version>
     <description>PLG_DJCATALOG2_CHECKOUTLOG_XML_DESCRIPTION</description>
 
+    <!--
+        PSR-4 root: BarlowsWoodyard\Plugin\DJCatalog2\CheckoutLog
+        maps to the src/ directory inside this plugin folder.
+    -->
+    <namespace path="src">BarlowsWoodyard\Plugin\DJCatalog2\CheckoutLog</namespace>
+
     <files>
+        <!-- checkoutlog.php is the entry-point stub required by the installer. -->
         <filename plugin="checkoutlog">checkoutlog.php</filename>
+        <folder>services</folder>
+        <folder>src</folder>
         <folder>language</folder>
         <folder>sql</folder>
     </files>

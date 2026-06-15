@@ -7,7 +7,6 @@ defined('_JEXEC') or die;
 // phpcs:enable PSR1.Files.SideEffects
 
 use Joomla\CMS\Document\HtmlDocument;
-use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Uri\Uri;
 use Joomla\Database\DatabaseAwareInterface;
@@ -43,7 +42,7 @@ final class CheckoutLog extends CMSPlugin implements SubscriberInterface, Databa
     // -------------------------------------------------------------------------
 
     /**
-     * Loads checkout-logger.js on every frontend HTML page.
+     * Loads checkout-logger.js on DJ Catalog 2 frontend pages.
      * The script self-limits: XHR/fetch patches are global but harmless,
      * and the Google Maps hook + logging only activate when the checkout
      * billing postcode field (#jform_djcatalog2profile_postcode) is present.
@@ -62,11 +61,15 @@ final class CheckoutLog extends CMSPlugin implements SubscriberInterface, Databa
             return;
         }
 
+        if ($app->input->getCmd('option') !== 'com_djcatalog2') {
+            return;
+        }
+
         $doc->addScriptOptions('plg_djcatalog2_checkoutlog', [
             'ajaxUrl' => Uri::root() . 'index.php?option=com_ajax&plugin=checkoutlog&group=system&format=raw',
         ]);
 
-        HTMLHelper::_('script', 'plg_system_checkoutlog/js/checkout-logger.js', ['version' => 'auto', 'relative' => true]);
+        $doc->addScript(Uri::root() . 'media/plg_system_checkoutlog/js/checkout-logger.js');
     }
 
     /**

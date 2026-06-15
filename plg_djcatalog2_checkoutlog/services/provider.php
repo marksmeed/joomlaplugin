@@ -12,13 +12,17 @@ use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 use Joomla\Event\DispatcherInterface;
 
-/**
- * Service provider returned to the Joomla DI container.
- *
- * Joomla 5 calls this file when it boots plugins that carry a
- * services/provider.php.  We wire up all dependencies here so the plugin
- * class itself only receives typed interfaces, not static singletons.
- */
+// Register PSR-4 namespace manually — the installer normally does this, but
+// a manually-deployed plugin (FTP without going through the extension manager)
+// will not have an entry in Joomla's autoload map.
+\JLoader::registerNamespace(
+    'BarlowsWoodyard\\Plugin\\DJCatalog2\\CheckoutLog',
+    dirname(__DIR__) . '/src',
+    false,
+    false,
+    'psr4'
+);
+
 return new class implements ServiceProviderInterface {
 
     public function register(Container $container): void

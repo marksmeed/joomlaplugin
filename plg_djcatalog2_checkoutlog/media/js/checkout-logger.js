@@ -60,12 +60,18 @@
         };
     }
 
-    // Scripts load at the bottom of the page, so the DOM is already parsed here.
-    // Only start the Google Maps polling on the checkout page — avoids an infinite
-    // setTimeout on product listing / cart pages where Google Maps never loads.
-    if (document.getElementById('jform_djcatalog2profile_postcode')) {
-        hookDistanceMatrix();
+    // Wait for the DOM before checking for the postcode field — the script may
+    // load in <head> before the body is parsed.
+    function onDOMReady(fn) {
+        if (document.readyState !== 'loading') { fn(); }
+        else { document.addEventListener('DOMContentLoaded', fn); }
     }
+
+    onDOMReady(function () {
+        if (document.getElementById('jform_djcatalog2profile_postcode')) {
+            hookDistanceMatrix();
+        }
+    });
 
     function getDeliveryOptions() {
         var opts = [];

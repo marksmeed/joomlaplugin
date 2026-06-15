@@ -3,7 +3,7 @@
 defined('_JEXEC') or die;
 // phpcs:enable PSR1.Files.SideEffects
 
-use BarlowsWoodyard\Plugin\DJCatalog2\CheckoutLog\Extension\CheckoutLog;
+use BarlowsWoodyard\Plugin\System\CheckoutLog\Extension\CheckoutLog;
 use Joomla\CMS\Extension\PluginInterface;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\PluginHelper;
@@ -16,7 +16,7 @@ use Joomla\Event\DispatcherInterface;
 // a manually-deployed plugin (FTP without going through the extension manager)
 // will not have an entry in Joomla's autoload map.
 \JLoader::registerNamespace(
-    'BarlowsWoodyard\\Plugin\\DJCatalog2\\CheckoutLog',
+    'BarlowsWoodyard\\Plugin\\System\\CheckoutLog',
     dirname(__DIR__) . '/src',
     false,
     false,
@@ -32,7 +32,7 @@ return new class implements ServiceProviderInterface {
             static function (Container $container): PluginInterface {
                 $plugin = new CheckoutLog(
                     $container->get(DispatcherInterface::class),
-                    (array) PluginHelper::getPlugin('djcatalog2', 'checkoutlog')
+                    (array) PluginHelper::getPlugin('system', 'checkoutlog')
                 );
 
                 $plugin->setApplication(Factory::getApplication());

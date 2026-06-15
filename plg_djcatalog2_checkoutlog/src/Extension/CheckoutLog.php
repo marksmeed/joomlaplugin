@@ -1,6 +1,6 @@
 <?php
 
-namespace BarlowsWoodyard\Plugin\DJCatalog2\CheckoutLog\Extension;
+namespace BarlowsWoodyard\Plugin\System\CheckoutLog\Extension;
 
 // phpcs:disable PSR1.Files.SideEffects
 defined('_JEXEC') or die;
@@ -66,7 +66,7 @@ final class CheckoutLog extends CMSPlugin implements SubscriberInterface, Databa
         }
 
         $doc->addScriptOptions('plg_djcatalog2_checkoutlog', [
-            'ajaxUrl' => Uri::root() . 'index.php?option=com_ajax&plugin=checkoutlog&group=djcatalog2&format=raw',
+            'ajaxUrl' => Uri::root() . 'index.php?option=com_ajax&plugin=checkoutlog&group=system&format=raw',
         ]);
 
         HTMLHelper::_('script', 'plg_djcatalog2_checkoutlog/js/checkout-logger.js', ['version' => 'auto', 'relative' => true]);

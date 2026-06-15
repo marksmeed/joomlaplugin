@@ -3,7 +3,7 @@
     <name>PLG_DJCATALOG2_CHECKOUTLOG</name>
     <author>Custom</author>
     <creationDate>2026-06-15</creationDate>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <description>PLG_DJCATALOG2_CHECKOUTLOG_XML_DESCRIPTION</description>
 
     <!--
@@ -20,6 +20,8 @@
         <folder>language</folder>
         <folder>sql</folder>
     </files>
+
+    <media destination="plg_djcatalog2_checkoutlog" folder="media" />
 
     <languages>
         <language tag="en-GB">language/en-GB/plg_djcatalog2_checkoutlog.ini</language>

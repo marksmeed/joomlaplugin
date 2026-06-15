@@ -6,7 +6,10 @@ namespace BarlowsWoodyard\Plugin\DJCatalog2\CheckoutLog\Extension;
 defined('_JEXEC') or die;
 // phpcs:enable PSR1.Files.SideEffects
 
+use Joomla\CMS\Document\HtmlDocument;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Uri\Uri;
 use Joomla\Database\DatabaseAwareInterface;
 use Joomla\Database\DatabaseAwareTrait;
 use Joomla\Event\Event;
@@ -29,6 +32,7 @@ final class CheckoutLog extends CMSPlugin implements SubscriberInterface, Databa
     public static function getSubscribedEvents(): array
     {
         return [
+            'onBeforeRender'     => 'injectCheckoutScript',
             'onAjaxCheckoutlog'  => 'handleAjaxLog',
             'onContentAfterSave' => 'handleContentAfterSave',
         ];
@@ -37,6 +41,35 @@ final class CheckoutLog extends CMSPlugin implements SubscriberInterface, Databa
     // -------------------------------------------------------------------------
     // Event handlers
     // -------------------------------------------------------------------------
+
+    /**
+     * Loads checkout-logger.js on any DJ Catalog 2 frontend page.
+     * The script self-limits to the checkout page by checking for the billing postcode field.
+     */
+    public function injectCheckoutScript(Event $event): void
+    {
+        $app = $this->getApplication();
+
+        if (!$app->isClient('site')) {
+            return;
+        }
+
+        $doc = $app->getDocument();
+
+        if (!($doc instanceof HtmlDocument)) {
+            return;
+        }
+
+        if ($app->input->getCmd('option') !== 'com_djcatalog2') {
+            return;
+        }
+
+        $doc->addScriptOptions('plg_djcatalog2_checkoutlog', [
+            'ajaxUrl' => Uri::root() . 'index.php?option=com_ajax&plugin=checkoutlog&group=djcatalog2&format=raw',
+        ]);
+
+        HTMLHelper::_('script', 'plg_djcatalog2_checkoutlog/js/checkout-logger.js', ['version' => 'auto', 'relative' => true]);
+    }
 
     /**
      * Called by com_ajax (index.php?option=com_ajax&plugin=checkoutlog&group=djcatalog2).

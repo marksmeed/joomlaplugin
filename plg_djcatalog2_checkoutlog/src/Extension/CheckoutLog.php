@@ -43,9 +43,10 @@ final class CheckoutLog extends CMSPlugin implements SubscriberInterface, Databa
     // -------------------------------------------------------------------------
 
     /**
-     * Loads checkout-logger.js on any DJ Catalog 2 frontend page.
-     * The script patches XHR/fetch globally but only logs data (and starts the
-     * Google Maps polling) when the checkout billing postcode field is present.
+     * Loads checkout-logger.js on every frontend HTML page.
+     * The script self-limits: XHR/fetch patches are global but harmless,
+     * and the Google Maps hook + logging only activate when the checkout
+     * billing postcode field (#jform_djcatalog2profile_postcode) is present.
      */
     public function injectCheckoutScript(Event $event): void
     {
@@ -58,10 +59,6 @@ final class CheckoutLog extends CMSPlugin implements SubscriberInterface, Databa
         $doc = $app->getDocument();
 
         if (!($doc instanceof HtmlDocument)) {
-            return;
-        }
-
-        if ($app->input->getCmd('option') !== 'com_djcatalog2') {
             return;
         }
 

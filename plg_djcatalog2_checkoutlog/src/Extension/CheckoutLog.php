@@ -8,6 +8,8 @@ defined('_JEXEC') or die;
 
 use Djcatalog2HelperCart;
 use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\Database\DatabaseAwareInterface;
+use Joomla\Database\DatabaseAwareTrait;
 use Joomla\Event\Event;
 use Joomla\Event\SubscriberInterface;
 
@@ -25,8 +27,10 @@ use Joomla\Event\SubscriberInterface;
  *                   The billing postcode and the full price breakdown are
  *                   available here.
  */
-final class CheckoutLog extends CMSPlugin implements SubscriberInterface
+final class CheckoutLog extends CMSPlugin implements SubscriberInterface, DatabaseAwareInterface
 {
+    use DatabaseAwareTrait;
+
     protected $autoloadLanguage = true;
 
     // -------------------------------------------------------------------------

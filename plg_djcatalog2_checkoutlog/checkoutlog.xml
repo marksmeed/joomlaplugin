@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="djcatalog2" method="upgrade">
+    <name>PLG_DJCATALOG2_CHECKOUTLOG</name>
+    <author>Custom</author>
+    <creationDate>2026-06-15</creationDate>
+    <version>1.0.0</version>
+    <description>PLG_DJCATALOG2_CHECKOUTLOG_XML_DESCRIPTION</description>
+
+    <files>
+        <filename plugin="checkoutlog">checkoutlog.php</filename>
+        <folder>language</folder>
+        <folder>sql</folder>
+    </files>
+
+    <languages>
+        <language tag="en-GB">language/en-GB/plg_djcatalog2_checkoutlog.ini</language>
+        <language tag="en-GB">language/en-GB/plg_djcatalog2_checkoutlog.sys.ini</language>
+    </languages>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+
+                <field
+                    name="log_cart_summary"
+                    type="radio"
+                    label="PLG_DJCATALOG2_CHECKOUTLOG_LOG_CART_SUMMARY_LABEL"
+                    description="PLG_DJCATALOG2_CHECKOUTLOG_LOG_CART_SUMMARY_DESC"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
+                    name="log_orders"
+                    type="radio"
+                    label="PLG_DJCATALOG2_CHECKOUTLOG_LOG_ORDERS_LABEL"
+                    description="PLG_DJCATALOG2_CHECKOUTLOG_LOG_ORDERS_DESC"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

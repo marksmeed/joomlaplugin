@@ -59,7 +59,13 @@
             });
         };
     }
-    hookDistanceMatrix();
+
+    // Scripts load at the bottom of the page, so the DOM is already parsed here.
+    // Only start the Google Maps polling on the checkout page — avoids an infinite
+    // setTimeout on product listing / cart pages where Google Maps never loads.
+    if (document.getElementById('jform_djcatalog2profile_postcode')) {
+        hookDistanceMatrix();
+    }
 
     function getDeliveryOptions() {
         var opts = [];

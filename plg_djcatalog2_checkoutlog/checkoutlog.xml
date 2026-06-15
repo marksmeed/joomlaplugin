@@ -24,8 +24,8 @@
     <media destination="plg_djcatalog2_checkoutlog" folder="media" />
 
     <languages>
-        <language tag="en-GB">language/en-GB/plg_djcatalog2_checkoutlog.ini</language>
-        <language tag="en-GB">language/en-GB/plg_djcatalog2_checkoutlog.sys.ini</language>
+        <language tag="en-GB">language/en-GB/plg_system_checkoutlog.ini</language>
+        <language tag="en-GB">language/en-GB/plg_system_checkoutlog.sys.ini</language>
     </languages>
 
     <install>
